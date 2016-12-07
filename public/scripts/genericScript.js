@@ -63,6 +63,7 @@ $( document ).ready( function(){
     var awardName = $( '#awardName' ).val();
     console.log(eventName, athleteName, awardName);
     postData(eventName, athleteName, awardName);
+    $('input').val('');
   }); // end testGetButton
 
 }); //end doc ready
