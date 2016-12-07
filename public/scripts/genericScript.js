@@ -73,13 +73,25 @@ $('#sortButton').on('click', function(){
   $('#eventsOutput').html('');
   for (var i = 0; i < eventsArray.length; i++) {
     appendEventsToDom(eventsArray[i]);
-  }
+  } // end for loop
 }); // end sort button
+$(document).on('click', '.athleteName', function(){
+  console.log('athlete name clicked');
+  var athlete = $(this).data('athlete');
+  var athleteArray = [];
+  for (var i = 0; i < eventsArray.length; i++) {
+    if (eventsArray[i].athleteName === athlete) {
+      athleteArray.push(eventsArray[i]);
+    } // end if
+    appendEventsToDom(athleteArray[i]); // couldn't figure out how to do Pro mode 
+  } //end for
+}); // end athlete button
+
 var appendEventsToDom = function(array){
   $('#eventsOutput').append('<div class="event"></div>');
   var $el = $('#eventsOutput').children().last();
   $el.append('<p>' + array.eventName + '</p>');
-  $el.append('<p>' + array.athleteName + '</p>');
+  $el.append('<button class="athleteName" data-athlete="' + array.athleteName + '">' + array.athleteName + '</button>');
   $el.append('<p>' + array.awardName + '</p>');
 };
 }); //end doc ready
