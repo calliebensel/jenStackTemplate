@@ -1,5 +1,7 @@
 console.log( 'genero sourced' );
 
+var eventsArray = [];
+
 $( document ).ready( function(){
   console.log( 'JQ' );
 
@@ -38,7 +40,9 @@ $( document ).ready( function(){
         var newEvent = events[events.length-1];
         console.log('pared response', newEvent);
         console.log( 'back from post call:', response );
-
+        // push to events array local
+        eventsArray.push(newEvent);
+        // append
         $('#eventsOutput').append('<div class="event"></div>');
         var $el = $('#eventsOutput').children().last();
         $el.append('<p>' + newEvent.eventName + '</p>');
@@ -65,5 +69,18 @@ $( document ).ready( function(){
     postData(eventName, athleteName, awardName);
     $('input').val('');
   }); // end testGetButton
-
+$('#sortButton').on('click', function(){
+  console.log('sort button');
+  eventsArray.sort(function(a,b){
+    return a.eventName > b.eventName;
+  }); // end sort function
+  $('#eventsOutput').html('');
+  for (var i = 0; i < eventsArray.length; i++) {
+    $('#eventsOutput').append('<div class="event"></div>');
+    var $el = $('#eventsOutput').children().last();
+    $el.append('<p>' + eventsArray[i].eventName + '</p>');
+    $el.append('<p>' + eventsArray[i].athleteName + '</p>');
+    $el.append('<p>' + eventsArray[i].awardName + '</p>');
+  }
+}); // end sort button
 }); //end doc ready
