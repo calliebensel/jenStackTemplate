@@ -43,11 +43,7 @@ $( document ).ready( function(){
         // push to events array local
         eventsArray.push(newEvent);
         // append
-        $('#eventsOutput').append('<div class="event"></div>');
-        var $el = $('#eventsOutput').children().last();
-        $el.append('<p>' + newEvent.eventName + '</p>');
-        $el.append('<p>' + newEvent.athleteName + '</p>');
-        $el.append('<p>' + newEvent.awardName + '</p>');
+        appendEventsToDom(newEvent);
       },
       error: function(){
         console.log( 'error with ajax call...');
@@ -76,11 +72,14 @@ $('#sortButton').on('click', function(){
   }); // end sort function
   $('#eventsOutput').html('');
   for (var i = 0; i < eventsArray.length; i++) {
-    $('#eventsOutput').append('<div class="event"></div>');
-    var $el = $('#eventsOutput').children().last();
-    $el.append('<p>' + eventsArray[i].eventName + '</p>');
-    $el.append('<p>' + eventsArray[i].athleteName + '</p>');
-    $el.append('<p>' + eventsArray[i].awardName + '</p>');
+    appendEventsToDom(eventsArray[i]);
   }
 }); // end sort button
+var appendEventsToDom = function(array){
+  $('#eventsOutput').append('<div class="event"></div>');
+  var $el = $('#eventsOutput').children().last();
+  $el.append('<p>' + array.eventName + '</p>');
+  $el.append('<p>' + array.athleteName + '</p>');
+  $el.append('<p>' + array.awardName + '</p>');
+};
 }); //end doc ready
